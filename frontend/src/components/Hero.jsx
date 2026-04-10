@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useHeroAnimation } from "../hooks/useHeroAnimation";
 
 const Hero = () => {
+  const ref = useRef(null);
+  useHeroAnimation(ref);
+
   const text = "WELCOME ITZFIZZ";
 
   return (
-    <section className="hero h-screen flex flex-col justify-center items-center overflow-hidden">
-      
-      {/* Heading */}
+    <section
+      ref={ref}
+      className="hero h-screen flex flex-col justify-center items-center overflow-hidden"
+    >
       <h1 className="hero-text text-5xl md:text-6xl font-bold tracking-[0.5em] text-center">
         {text.split("").map((char, i) => (
           <span key={i} className="char inline-block">
@@ -15,7 +20,6 @@ const Hero = () => {
         ))}
       </h1>
 
-      {/* Stats */}
       <div className="stats flex gap-10 mt-10">
         <div className="stat text-center">
           <h2 className="text-3xl font-bold">95%</h2>
@@ -28,11 +32,9 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Visual Element (we animate this later) */}
       <div className="hero-image mt-20 w-64 h-40 bg-gray-300 flex items-center justify-center text-black">
         Visual
       </div>
-
     </section>
   );
 };
