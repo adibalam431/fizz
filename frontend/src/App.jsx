@@ -1,9 +1,12 @@
+import Hero from "./components/Hero";
 
-
-const App = () => {
+function App() {
   return (
-    <div className="bg-gray-600">App</div>
-  )
+    <>
+      <Hero />
+      <div className="h-[200vh]"></div> {/* scroll space */}
+    </>
+  );
 }
 
-export default App
+export default App;

@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+.hero {
+  position: relative;
+}
+
+.hero-image {
+  will-change: transform;
+}
