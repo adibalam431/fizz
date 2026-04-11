@@ -1,10 +1,10 @@
 
 
 ## Live Demo
-[Add your link]
+https://fizz-puce.vercel.app/
 
 ## GitHub
-[Add repo link]
+https://github.com/adibalam431/fizz.git
 
 
 # Scroll-Driven Hero Animation ###(increase your brightness for better glow)
