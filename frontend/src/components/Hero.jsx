@@ -40,10 +40,10 @@ const Hero = () => {
 
       {/* Visual */}
       <img
-        src="https://images.unsplash.com/photo-1503376780353-7e6692767b70"
-        alt="visual"
-        className="mt-20 w-[500px] rounded-xl shadow-2xl"
-      />
+  src="https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+  alt="visual"
+  className="hero-image mt-20 w-[500px] rounded-xl shadow-2xl"
+/>
     </section>
   );
 };

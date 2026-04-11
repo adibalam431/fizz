@@ -1,5 +1,8 @@
 import { useLayoutEffect } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const useHeroAnimation = (containerRef) => {
   useLayoutEffect(() => {
@@ -9,8 +12,9 @@ export const useHeroAnimation = (containerRef) => {
 
     const chars = el.querySelectorAll(".char");
     const stats = el.querySelectorAll(".stat");
+    const image = el.querySelector(".hero-image");
 
-    // IMPORTANT: set initial state explicitly
+    // ===== ENTRY ANIMATION =====
     gsap.set(chars, { opacity: 0, y: 80 });
     gsap.set(stats, { opacity: 0, y: 40 });
 
@@ -34,8 +38,23 @@ export const useHeroAnimation = (containerRef) => {
       "-=0.5"
     );
 
+    // ===== SCROLL ANIMATION =====
+    gsap.to(image, {
+      x: 400,
+      rotation: 10,
+      scale: 1.1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: el,
+        start: "top top",
+        end: "bottom top",
+        scrub: 1.5,
+      },
+    });
+
     return () => {
-      tl.kill(); // cleanup properly
+      tl.kill();
+      ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
 };
