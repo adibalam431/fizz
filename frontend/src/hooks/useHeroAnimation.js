@@ -13,6 +13,8 @@ export const useHeroAnimation = (containerRef) => {
     const chars = el.querySelectorAll(".char");
     const stats = el.querySelectorAll(".stat");
     const image = el.querySelector(".hero-image");
+    const bg = el.querySelector(".bg-layer");
+    const bg2 = el.querySelector(".bg-layer-2");
 
     // ===== ENTRY ANIMATION =====
     gsap.set(chars, { opacity: 0, y: 80 });
@@ -38,12 +40,23 @@ export const useHeroAnimation = (containerRef) => {
       "-=0.5"
     );
 
-    // ===== SCROLL ANIMATION =====
+    // ===== IMAGE SCROLL (MERGED) =====
     gsap.to(image, {
       x: 400,
-      rotation: 10,
-      scale: 1.1,
+      y: -80,
+      rotation: 8,
+      scale: 1.08,
       ease: "none",
+      scrollTrigger: {
+        trigger: el,
+        start: "top top",
+        end: "bottom top",
+        scrub: 1.2,
+      },
+    });
+
+    // ===== BACKGROUND PARALLAX (SINGLE TIMELINE) =====
+    const bgTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: el,
         start: "top top",
@@ -51,6 +64,26 @@ export const useHeroAnimation = (containerRef) => {
         scrub: 1.5,
       },
     });
+
+    bgTimeline
+      .to(
+        bg,
+        {
+          y: -150,
+          x: 100,
+          ease: "none",
+        },
+        0
+      )
+      .to(
+        bg2,
+        {
+          y: 100,
+          x: -100,
+          ease: "none",
+        },
+        0
+      );
 
     return () => {
       tl.kill();

@@ -9,9 +9,12 @@ const Hero = () => {
 
   return (
     <section
+    
       ref={containerRef}
       className="h-screen flex flex-col justify-center items-center"
     >
+        <div className="bg-layer absolute w-[800px] h-[800px] bg-purple-500/20 blur-3xl rounded-full top-[-200px] left-[-200px]" />
+        <div className="bg-layer-2 absolute w-[600px] h-[600px] bg-blue-500/10 blur-3xl rounded-full bottom-[-100px] right-[-100px]" />
       {/* Heading */}
       <h1 className="text-6xl md:text-7xl font-extrabold tracking-[0.4em] text-center">
         {text.split("").map((char, i) => (

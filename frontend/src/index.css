@@ -12,3 +12,10 @@ body {
   background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
   color: white;
 }
+
+.hero-image,
+.bg-layer,
+.bg-layer-2 {
+  will-change: transform;
+  transform: translateZ(0);
+}
