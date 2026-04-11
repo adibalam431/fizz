@@ -1,28 +1,44 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useHeroAnimation } from "../hooks/useHeroAnimation";
+
+const words = [
+  "WELCOME",
+  "BIENVENUE",
+  "WILLKOMMEN",
+  "ようこそ",
+  "환영합니다",
+  "स्वागत है",
+];
 
 const Hero = () => {
   const containerRef = useRef(null);
   useHeroAnimation(containerRef);
 
-  const text = "WELCOME ITZFIZZ";
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % words.length);
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section
-    
       ref={containerRef}
-      className="h-screen flex flex-col justify-center items-center"
+      className="h-screen flex flex-col justify-center items-center overflow-hidden"
     >
-        <div className="bg-layer absolute w-[800px] h-[800px] bg-purple-500/20 blur-3xl rounded-full top-[-200px] left-[-200px]" />
-        <div className="bg-layer-2 absolute w-[600px] h-[600px] bg-blue-500/10 blur-3xl rounded-full bottom-[-100px] right-[-100px]" />
-      {/* Heading */}
-      <h1 className="text-6xl md:text-7xl font-extrabold tracking-[0.4em] text-center mt-24">
-        {text.split("").map((char, i) => (
-          <span key={i} className="char inline-block">
-            {char === " " ? "\u00A0" : char}
-          </span>
-        ))}
+      <div className="absolute w-[400px] h-[400px] bg-blue-500/10 blur-2xl rounded-full top-[20%] left-[30%] pointer-events-none" />
+      {/* Changing Title */}
+      <h1 className="text-6xl md:text-7xl font-extrabold tracking-[0.3em] text-center transition-opacity duration-500 mt-30">
+        {words[index]}
       </h1>
+
+      {/* Static ITZFIZZ */}
+      <h2 className="text-xl mt-4 tracking-widest text-gray-400">
+        ITZFIZZ
+      </h2>
 
       {/* Stats */}
       <div className="flex gap-16 mt-12">
@@ -41,12 +57,11 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Visual */}
       <img
-  src="https://images.unsplash.com/photo-1503376780353-7e6692767b70"
-  alt="visual"
-  className="hero-image mt-20 w-[500px] rounded-xl shadow-2xl"
-/>
+        src="https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+        alt="visual"
+        className="hero-image mt-20 w-[90vw] max-w-[500px] rounded-xl shadow-2xl"
+      />
     </section>
   );
 };

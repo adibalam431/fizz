@@ -7,7 +7,7 @@
 [Add repo link]
 
 
-# Scroll-Driven Hero Animation
+# Scroll-Driven Hero Animation ###(increase your brightness for better glow)
 
 ## Tech Stack
 - React (Vite)
