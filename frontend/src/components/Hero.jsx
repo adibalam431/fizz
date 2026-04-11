@@ -62,6 +62,22 @@ const Hero = () => {
         alt="visual"
         className="hero-image mt-20 w-[90vw] max-w-[500px] rounded-xl shadow-2xl"
       />
+
+      <div className="grid grid-cols-2 gap-6 mt-16 max-w-3xl w-full px-4">
+  
+  {["Fast", "Secure", "Scalable", "Reliable"].map((item, i) => (
+    <div
+      key={i}
+      className="card bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-md transition-transform duration-300 hover:scale-[1.03] hover:rotate-1"
+    >
+      <h3 className="text-lg font-semibold">{item}</h3>
+      <p className="text-sm text-gray-400 mt-2">
+        High quality performance and optimized experience.
+      </p>
+    </div>
+  ))}
+
+</div>
     </section>
   );
 };

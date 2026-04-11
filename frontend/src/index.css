@@ -19,3 +19,7 @@ body {
   will-change: transform;
   transform: translateZ(0);
 }
+
+.card {
+  transform-style: preserve-3d;
+}

@@ -13,10 +13,12 @@ export const useHeroAnimation = (containerRef) => {
     const chars = el.querySelectorAll(".char");
     const stats = el.querySelectorAll(".stat");
     const image = el.querySelector(".hero-image");
+    const cards = el.querySelectorAll(".card");
 
     // ===== ENTRY =====
     gsap.set(chars, { opacity: 0, y: 60 });
     gsap.set(stats, { opacity: 0, y: 30 });
+    gsap.set(cards, { opacity: 0, y: 40 });
 
     const entry = gsap.timeline();
 
@@ -52,6 +54,18 @@ export const useHeroAnimation = (containerRef) => {
         start: "top top",
         end: "bottom top",
         scrub: 0.6,
+      },
+    });
+
+    gsap.to(cards, {
+      opacity: 1,
+      y: 0,
+      stagger: 0.15,
+      duration: 0.8,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: cards,
+        start: "top 80%",
       },
     });
 
