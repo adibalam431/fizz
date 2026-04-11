@@ -1,33 +1,41 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import gsap from "gsap";
 
-export const useHeroAnimation = (ref) => {
-  useEffect(() => {
-    if (!ref.current) return;
+export const useHeroAnimation = (containerRef) => {
+  useLayoutEffect(() => {
+    if (!containerRef.current) return;
 
-    const ctx = gsap.context(() => {
-      
-      // Heading animation (stagger letters)
-      gsap.from(".char", {
-        y: 50,
-        opacity: 0,
-        stagger: 0.05,
+    const el = containerRef.current;
+
+    const chars = el.querySelectorAll(".char");
+    const stats = el.querySelectorAll(".stat");
+
+    // IMPORTANT: set initial state explicitly
+    gsap.set(chars, { opacity: 0, y: 80 });
+    gsap.set(stats, { opacity: 0, y: 40 });
+
+    const tl = gsap.timeline();
+
+    tl.to(chars, {
+      opacity: 1,
+      y: 0,
+      stagger: 0.04,
+      duration: 1,
+      ease: "power4.out",
+    }).to(
+      stats,
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.2,
         duration: 0.8,
         ease: "power3.out",
-      });
+      },
+      "-=0.5"
+    );
 
-      // Stats animation
-      gsap.from(".stat", {
-        y: 30,
-        opacity: 0,
-        stagger: 0.2,
-        delay: 0.5,
-        duration: 0.6,
-        ease: "power2.out",
-      });
-
-    }, ref);
-
-    return () => ctx.revert(); // cleanup (important)
-  }, [ref]);
+    return () => {
+      tl.kill(); // cleanup properly
+    };
+  }, []);
 };

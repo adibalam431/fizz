@@ -2,17 +2,18 @@ import React, { useRef } from "react";
 import { useHeroAnimation } from "../hooks/useHeroAnimation";
 
 const Hero = () => {
-  const ref = useRef(null);
-  useHeroAnimation(ref);
+  const containerRef = useRef(null);
+  useHeroAnimation(containerRef);
 
   const text = "WELCOME ITZFIZZ";
 
   return (
     <section
-      ref={ref}
-      className="hero h-screen flex flex-col justify-center items-center overflow-hidden"
+      ref={containerRef}
+      className="h-screen flex flex-col justify-center items-center"
     >
-      <h1 className="hero-text text-5xl md:text-6xl font-bold tracking-[0.5em] text-center">
+      {/* Heading */}
+      <h1 className="text-6xl md:text-7xl font-extrabold tracking-[0.4em] text-center">
         {text.split("").map((char, i) => (
           <span key={i} className="char inline-block">
             {char === " " ? "\u00A0" : char}
@@ -20,21 +21,29 @@ const Hero = () => {
         ))}
       </h1>
 
-      <div className="stats flex gap-10 mt-10">
+      {/* Stats */}
+      <div className="flex gap-16 mt-12">
         <div className="stat text-center">
-          <h2 className="text-3xl font-bold">95%</h2>
-          <p className="text-sm opacity-70">Client Satisfaction</p>
+          <h2 className="text-4xl font-bold">95%</h2>
+          <p className="text-xs uppercase tracking-widest text-gray-400 mt-1">
+            Client Satisfaction
+          </p>
         </div>
 
         <div className="stat text-center">
-          <h2 className="text-3xl font-bold">120+</h2>
-          <p className="text-sm opacity-70">Projects Delivered</p>
+          <h2 className="text-4xl font-bold">120+</h2>
+          <p className="text-xs uppercase tracking-widest text-gray-400 mt-1">
+            Projects Delivered
+          </p>
         </div>
       </div>
 
-      <div className="hero-image mt-20 w-64 h-40 bg-gray-300 flex items-center justify-center text-black">
-        Visual
-      </div>
+      {/* Visual */}
+      <img
+        src="https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+        alt="visual"
+        className="mt-20 w-[500px] rounded-xl shadow-2xl"
+      />
     </section>
   );
 };
