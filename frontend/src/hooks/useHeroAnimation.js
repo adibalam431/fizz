@@ -20,33 +20,30 @@ export const useHeroAnimation = (containerRef) => {
     gsap.set(chars, { opacity: 0, y: 80 });
     gsap.set(stats, { opacity: 0, y: 40 });
 
-    const tl = gsap.timeline();
+    const entryTl = gsap.timeline();
 
-    tl.to(chars, {
-      opacity: 1,
-      y: 0,
-      stagger: 0.04,
-      duration: 1,
-      ease: "power4.out",
-    }).to(
-      stats,
-      {
+    entryTl
+      .to(chars, {
         opacity: 1,
         y: 0,
-        stagger: 0.2,
-        duration: 0.8,
-        ease: "power3.out",
-      },
-      "-=0.5"
-    );
+        stagger: 0.04,
+        duration: 1,
+        ease: "power4.out",
+      })
+      .to(
+        stats,
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.2,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        "-=0.5"
+      );
 
-    // ===== IMAGE SCROLL (MERGED) =====
-    gsap.to(image, {
-      x: 400,
-      y: -80,
-      rotation: 8,
-      scale: 1.08,
-      ease: "none",
+    // ===== MAIN SCROLL TIMELINE (IMPORTANT REFACTOR) =====
+    const scrollTl = gsap.timeline({
       scrollTrigger: {
         trigger: el,
         start: "top top",
@@ -55,17 +52,42 @@ export const useHeroAnimation = (containerRef) => {
       },
     });
 
-    // ===== BACKGROUND PARALLAX (SINGLE TIMELINE) =====
-    const bgTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: el,
-        start: "top top",
-        end: "bottom top",
-        scrub: 1.5,
+    // Image motion (base)
+    scrollTl.to(
+      image,
+      {
+        x: 350,
+        y: -60,
+        rotation: 6,
+        scale: 1.06,
+        ease: "none",
       },
-    });
+      0
+    );
 
-    bgTimeline
+    // Text parallax
+    scrollTl.to(
+      chars,
+      {
+        y: -20,
+        ease: "none",
+      },
+      0
+    );
+
+    // Stats subtle motion
+    scrollTl.to(
+      stats,
+      {
+        y: -10,
+        opacity: 0.85,
+        ease: "none",
+      },
+      0
+    );
+
+    // Background parallax
+    scrollTl
       .to(
         bg,
         {
@@ -85,8 +107,12 @@ export const useHeroAnimation = (containerRef) => {
         0
       );
 
+   
+
+    // ===== CLEANUP =====
     return () => {
-      tl.kill();
+      entryTl.kill();
+      scrollTl.kill();
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
