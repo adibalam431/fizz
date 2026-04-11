@@ -62,4 +62,9 @@ body {
 
 .card:hover .glass-shine {
   transform: translateX(100%);
+  transform: translateY(-4px) scale(1.02);
+}
+.card {
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 }
