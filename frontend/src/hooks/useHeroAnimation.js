@@ -13,22 +13,20 @@ export const useHeroAnimation = (containerRef) => {
     const chars = el.querySelectorAll(".char");
     const stats = el.querySelectorAll(".stat");
     const image = el.querySelector(".hero-image");
-    const bg = el.querySelector(".bg-layer");
-    const bg2 = el.querySelector(".bg-layer-2");
 
-    // ===== ENTRY ANIMATION =====
-    gsap.set(chars, { opacity: 0, y: 80 });
-    gsap.set(stats, { opacity: 0, y: 40 });
+    // ===== ENTRY =====
+    gsap.set(chars, { opacity: 0, y: 60 });
+    gsap.set(stats, { opacity: 0, y: 30 });
 
-    const entryTl = gsap.timeline();
+    const entry = gsap.timeline();
 
-    entryTl
+    entry
       .to(chars, {
         opacity: 1,
         y: 0,
         stagger: 0.04,
-        duration: 1,
-        ease: "power4.out",
+        duration: 0.8,
+        ease: "power3.out",
       })
       .to(
         stats,
@@ -36,83 +34,29 @@ export const useHeroAnimation = (containerRef) => {
           opacity: 1,
           y: 0,
           stagger: 0.2,
-          duration: 0.8,
-          ease: "power3.out",
+          duration: 0.6,
+          ease: "power2.out",
         },
-        "-=0.5"
+        "-=0.4"
       );
 
-    // ===== MAIN SCROLL TIMELINE (IMPORTANT REFACTOR) =====
-    const scrollTl = gsap.timeline({
+    // ===== SCROLL (ONLY ONE) =====
+    gsap.to(image, {
+      x: 250,
+      y: -40,
+      rotation: 2,
+      scale: 1.02,
+      ease: "none",
       scrollTrigger: {
         trigger: el,
         start: "top top",
         end: "bottom top",
-        scrub: 1.2,
+        scrub: 0.6,
       },
     });
 
-    // Image motion (base)
-    scrollTl.to(
-      image,
-      {
-        x: 350,
-        y: -60,
-        rotation: 6,
-        scale: 1.06,
-        ease: "none",
-      },
-      0
-    );
-
-    // Text parallax
-    scrollTl.to(
-      chars,
-      {
-        y: -20,
-        ease: "none",
-      },
-      0
-    );
-
-    // Stats subtle motion
-    scrollTl.to(
-      stats,
-      {
-        y: -10,
-        opacity: 0.85,
-        ease: "none",
-      },
-      0
-    );
-
-    // Background parallax
-    scrollTl
-      .to(
-        bg,
-        {
-          y: -150,
-          x: 100,
-          ease: "none",
-        },
-        0
-      )
-      .to(
-        bg2,
-        {
-          y: 100,
-          x: -100,
-          ease: "none",
-        },
-        0
-      );
-
-   
-
-    // ===== CLEANUP =====
     return () => {
-      entryTl.kill();
-      scrollTl.kill();
+      entry.kill();
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
