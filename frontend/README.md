@@ -1,3 +1,12 @@
+
+
+## Live Demo
+[Add your link]
+
+## GitHub
+[Add repo link]
+
+
 # Scroll-Driven Hero Animation
 
 ## Tech Stack
@@ -17,8 +26,3 @@ Built with emphasis on:
 - Performance
 - Clean animation architecture
 
-## Live Demo
-[Add your link]
-
-## GitHub
-[Add repo link]
