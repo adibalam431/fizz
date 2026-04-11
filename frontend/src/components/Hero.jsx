@@ -27,11 +27,11 @@ const Hero = () => {
   return (
     <section
       ref={containerRef}
-      className="h-screen flex flex-col justify-center items-center overflow-hidden"
+      className="min-h-screen py-20 flex relative flex-col justify-center items-center overflow-hidden"
     >
       <div className="absolute w-[400px] h-[400px] bg-blue-500/10 blur-2xl rounded-full top-[20%] left-[30%] pointer-events-none" />
       {/* Changing Title */}
-      <h1 className="text-6xl md:text-7xl font-extrabold tracking-[0.3em] text-center transition-opacity duration-500 mt-30">
+      <h1 className="text-6xl md:text-7xl font-extrabold tracking-[0.3em] text-center transition-opacity duration-500 z-10">
         {words[index]}
       </h1>
 
@@ -41,7 +41,7 @@ const Hero = () => {
       </h2>
 
       {/* Stats */}
-      <div className="flex gap-16 mt-12">
+      <div className="flex gap-16 mt-12 z-10">
         <div className="stat text-center">
           <h2 className="text-4xl font-bold">95%</h2>
           <p className="text-xs uppercase tracking-widest text-gray-400 mt-1">
@@ -60,24 +60,30 @@ const Hero = () => {
       <img
         src="https://images.unsplash.com/photo-1503376780353-7e6692767b70"
         alt="visual"
-        className="hero-image mt-20 w-[90vw] max-w-[500px] rounded-xl shadow-2xl"
+        className="hero-image mt-20 w-[90vw] max-w-[500px] rounded-xl shadow-2xl z-10"
       />
 
-      <div className="grid grid-cols-2 gap-6 mt-16 max-w-3xl w-full px-4">
+      <div className="grid grid-cols-2 gap-8 mt-12 max-w-3xl w-full px-4 z-10">
   
   {["Fast", "Secure", "Scalable", "Reliable"].map((item, i) => (
-    <div
-      key={i}
-      className="card bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-md transition-transform duration-300 hover:scale-[1.03] hover:rotate-1"
-    >
-      <h3 className="text-lg font-semibold">{item}</h3>
-      <p className="text-sm text-gray-400 mt-2">
-        High quality performance and optimized experience.
-      </p>
-    </div>
+    <div key={i} className="card relative rounded-xl p-6 overflow-hidden">
+  <div className="glass-content relative z-10">
+    <h3 className="text-lg font-semibold">{item}</h3>
+    <p className="text-sm text-gray-300 mt-2">
+      High quality performance and optimized experience.
+    </p>
+  </div>
+
+  {/* Glass layer */}
+  <div className="glass-layer absolute inset-0" />
+
+  {/* Shine layer */}
+  <div className="glass-shine absolute inset-0" />
+</div>
   ))}
 
 </div>
+
     </section>
   );
 };
