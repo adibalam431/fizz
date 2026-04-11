@@ -7,7 +7,7 @@ https://fizz-puce.vercel.app/
 https://github.com/adibalam431/fizz.git
 
 
-# Scroll-Driven Hero Animation ##(increase your brightness for better glow)
+# Scroll-Driven Hero Animation (increase your brightness for better glow)
 
 ## Tech Stack
 - React (Vite)
